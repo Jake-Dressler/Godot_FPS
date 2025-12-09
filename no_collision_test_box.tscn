@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://g10q0sn85iur"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_odjhn"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_vskdm"]
+material = SubResource("StandardMaterial3D_odjhn")
+
+[node name="NoCollisionTestBox" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 3.85237, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_vskdm")
+skeleton = NodePath("")

@@ -1,0 +1,73 @@
+[gd_scene load_steps=9 format=3 uid="uid://bw538fonbwnql"]
+
+[ext_resource type="Script" uid="uid://cbu81ep1uglnm" path="res://gun.gd" id="1_vk1bi"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r8ywq"]
+albedo_color = Color(0.255659, 0.255659, 0.255659, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_vk1bi"]
+material = SubResource("StandardMaterial3D_r8ywq")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dk5gl"]
+albedo_color = Color(0.417589, 0.227409, 0.000666996, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_kw0bs"]
+material = SubResource("StandardMaterial3D_dk5gl")
+
+[sub_resource type="Animation" id="Animation_dk5gl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("barrel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_vk1bi"]
+resource_name = "recoil"
+length = 0.1
+step = 0.033
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("barrel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -0.1), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kw0bs"]
+_data = {
+&"RESET": SubResource("Animation_dk5gl"),
+&"recoil": SubResource("Animation_vk1bi")
+}
+
+[node name="gun" type="Node3D"]
+script = ExtResource("1_vk1bi")
+
+[node name="barrel" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.6, 0, 0, 0)
+mesh = SubResource("BoxMesh_vk1bi")
+
+[node name="grip" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.3, 0, 0, 0, 0.2, 0, -0.262474, 0.128235)
+mesh = SubResource("BoxMesh_kw0bs")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_kw0bs")
+}
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.281557)
+target_position = Vector3(0, 0, -1)
