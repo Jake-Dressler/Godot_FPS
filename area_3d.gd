@@ -4,5 +4,5 @@ extends Area3D
 
 signal capsule_hit(dam)
 
-func _hit():
+func hit():
 	emit_signal("capsule_hit", damage)

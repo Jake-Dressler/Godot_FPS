@@ -1,7 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://cpyopu2umgrlg"]
+[gd_scene load_steps=13 format=3 uid="uid://cpyopu2umgrlg"]
 
+[ext_resource type="Script" uid="uid://ms7m1tnnyq6i" path="res://main.gd" id="1_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://c0wdrpq1w4fs0" path="res://player.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://g10q0sn85iur" path="res://no_collision_test_box.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://bv661h1t71kw3" path="res://capsule_enemy.tscn" id="3_h2yge"]
+[ext_resource type="Texture2D" uid="uid://dmlcw6h28wn7i" path="res://icon.svg" id="5_lquwl"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0xm2m"]
 size = Vector3(200, 1, 200)
@@ -26,6 +29,7 @@ sky = SubResource("Sky_0xm2m")
 [sub_resource type="BoxMesh" id="BoxMesh_0xm2m"]
 
 [node name="main" type="Node3D"]
+script = ExtResource("1_1bvp3")
 
 [node name="room" type="Node3D" parent="."]
 
@@ -66,3 +70,31 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, -4)
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.400893, 0, 0, 0, 1, 0, 3.99683, 0)
 mesh = SubResource("BoxMesh_0xm2m")
+
+[node name="capsule_enemy" parent="." instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.370766, 1.5, -0.61622906)
+health = 500
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TimeCounter" type="Label" parent="UI"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+horizontal_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="UI"]
+layout_mode = 0
+offset_left = 575.0
+offset_top = 317.00003
+offset_right = 703.0
+offset_bottom = 445.00003
+scale = Vector2(0.11999999, 0.119999945)
+
+[node name="TextureRect" type="TextureRect" parent="UI/CenterContainer"]
+layout_mode = 2
+texture = ExtResource("5_lquwl")
