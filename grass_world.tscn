@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://dfl6g5lwj1wyh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1hu2u"]
+size = Vector3(200, 1, 200)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2yge"]
+albedo_color = Color(0.373455, 0.560402, 0.315977, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_270i4"]
+material = SubResource("StandardMaterial3D_h2yge")
+
+[node name="grass_world" type="Node3D"]
+
+[node name="floor" type="Node3D" parent="."]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0895996)
+shape = SubResource("BoxShape3D_1hu2u")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="floor/StaticBody3D"]
+transform = Transform3D(200, 0, 0, 0, 0.2, 0, 0, 0, 200, 0, 0, 0)
+mesh = SubResource("BoxMesh_270i4")
+skeleton = NodePath("../..")
+
+[node name="player_spawn" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5615959, 88.55299)
